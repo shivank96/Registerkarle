@@ -1,0 +1,25 @@
+{% extends 'studentmainmenu.html' %}
+{% block commom %}
+<table class="table table-dark">
+    <tr><th colspan="6" style="text-align: center;color: black;background-color: white">Enrolled COURSES</th></tr>
+        <tr>
+            <th>courseName</th>
+            <th>Facultyname</th>
+            <th>Stardate</th>
+            <th>classtime</th>
+            <th>Duration</th>
+            <th>Fees</th>
+{#            <th>Salary</th>#}
+        </tr>
+    {% for x in object_list %}
+        <tr>
+        <th>{{ x.coursename }}</th>
+            <th>{{ x.facultyname }}</th>
+            <th>{{ x.stardate }}</th>
+            <th>{{ x.classtime }}</th>
+             <th>{{ x.duration }}</th>
+            <th>{{ x.fees }}</th>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

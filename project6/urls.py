@@ -54,5 +54,7 @@ urlpatterns = [
 
     path('studentmain/',views.Studentmain,name="studentmain"),
 
+    path('viewenrollments/',views.Viewenrollments.as_view(),name="viewenrollments")
+
 
 ]

@@ -126,3 +126,9 @@ def EnrollCourse(request):
 
 def Studentmain(request):
     return render(request, "userwelcome.html")
+
+
+class Viewenrollments(ListView):
+    template_name = "Emrolledcoures.html"
+    model = EnrollModel
+    queryset = EnrollModel.objects.values('idno', 'coursename', 'facultyname', 'stardate','fees','duration','classtime').order_by('idno')
