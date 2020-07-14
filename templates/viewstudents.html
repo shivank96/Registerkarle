@@ -1,0 +1,29 @@
+{% extends 'adminmainmenu.html' %}
+{% block commom %}
+ <table class="table table-dark">
+    <tr><th colspan="6" style="text-align: center;color: black;background-color: white">Registered students</th></tr>
+        <tr>
+            <th>StudentName</th>
+            <th>ContactNumber</th>
+            <th>Emailid</th>
+            <th>status</th>
+            <th>Approve</th>
+{#            <th>Salary</th>#}
+        </tr>
+    {% for x in object_list %}
+        {% if x.status == "pending" %}
+        <tr>
+        <th>{{ x.name }}</th>
+            <th>{{ x.contactnumber }}</th>
+            <th>{{ x.emailid }}</th>
+            <th>{{ x.status }}</th>
+            <form action="{% url 'approve' %}" method="get">
+                <input type="hidden" name="no" value="{{ x.idno }}">
+                <th><button type="submit">Yes</button></th>
+            </form>
+{% endif %}
+
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

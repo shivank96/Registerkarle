@@ -1,0 +1,19 @@
+{% extends 'adminmainmenu.html' %}
+{% block commom %}
+ <table class="table table-dark">
+    <tr>
+        <th colspan="2">Update employee details</th>
+    </tr>
+
+    <tr><form method="post">
+        {% csrf_token %}
+         {{ form }}
+        <th style="text-align: right">
+            <button type="submit">Update</button>
+        </th>
+    </form>
+    <form action="{% url 'viewcourse' %}">
+        <th style="text-align: left"><button type="submit">Back</button></th>
+    </form></tr>
+    </table>
+{% endblock %}
