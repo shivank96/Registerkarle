@@ -44,5 +44,15 @@ urlpatterns = [
 
     path('student_login/',TemplateView.as_view(template_name="student_login.html"),name="student_login"),
 
-    path('Check_details/',views.CheckDetails,name="Check_details")
+    path('Check_details/',views.CheckDetails,name="Check_details"),
+
+    path('viewcoursedetails/',views.Viewcoursedetails.as_view(),name="viewcoursedetails"),
+
+    path('enrollcourse/', views.EnrollCourse, name="enrollcourse"),
+
+    path('fulldetails<int:pk>/', views.ShowCourseDetails.as_view(), name="fulldetails"),
+
+    path('studentmain/',views.Studentmain,name="studentmain"),
+
+
 ]

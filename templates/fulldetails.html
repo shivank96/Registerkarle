@@ -1,0 +1,32 @@
+{% extends 'studentmainmenu.html' %}
+{% block commom %}
+<table class="table table-dark">
+    <tr>
+        <th colspan="2" style="text-align: center;color: black;background-color: white">complete Course details</th>
+    </tr>
+<tr>
+    <th>course idno</th><th>{{ object.idno }}</th>
+</tr>
+        <tr>
+            <th>Coursename</th><th>{{ object.coursename }}</th>
+        </tr>
+        <tr>
+            <th>Facultyname</th><th>{{ object.facultyname }}</th>
+        </tr>
+        <tr>
+            <th>Fees</th><th>{{ object.fees }}</th>
+        </tr>
+        <tr>
+            <th>Duration</th><th>{{ object.duration }}</th>
+        </tr>
+        <tr>
+            <th>Started on</th><th>{{ object.stardate }}</th>
+        </tr>
+        <tr>
+            <th>Classtime</th><th>{{ object.classtime }}</th>
+        </tr>
+    <form action="{% url 'viewcoursedetails' %}">
+        <th style="text-align: center" colspan="2" ><button type="submit">Back</button></th>
+    </form></tr>
+    </table>
+{% endblock %}

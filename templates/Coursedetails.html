@@ -1,6 +1,4 @@
-
-
-{% extends 'adminmainmenu.html' %}
+{% extends 'studentmainmenu.html' %}
 {% block commom %}
 <table class="table table-dark">
     <tr><th colspan="7" style="text-align: center;color: black;background-color: white">AVAILABLE COURSES</th></tr>
@@ -9,8 +7,7 @@
             <th>Facultyname</th>
             <th>Stardate</th>
             <th>View full details</th>
-            <th>Update</th>
-            <th>Delete</th>
+            <th>Enroll</th>
 {#            <th>Salary</th>#}
         </tr>
     {% for x in object_list %}
@@ -18,16 +15,23 @@
         <th>{{ x.coursename }}</th>
             <th>{{ x.facultyname }}</th>
             <th>{{ x.stardate }}</th>
-            <form action="{% url 'full_details' x.idno %}">
+            <form action="{% url 'fulldetails' x.idno %}">
                 <th><button type="submit">Yes</button></th>
             </form>
-             <form action="{% url 'update_course' x.idno %}">
+             <form action="{% url 'enrollcourse'%}" method="get">
+                 <input type="hidden" value="{{ x.idno }}" name="id">
                 <th><button type="submit">Yes</button></th>
             </form>
-            <form action="{% url 'delete_course' x.idno %}">
-                <th><button type="submit">Yes</button></th>
-            </form>
+
         </tr>
+
     {% endfor %}
+
     </table>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-primary" role="alert" style="text-align: center">
+{{ message }}</div>
+    {% endfor %}
+    {% endif %}
 {% endblock %}

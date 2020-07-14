@@ -17,3 +17,11 @@ class StudentModel(models.Model):
     password = models.CharField(max_length=50)
     status = models.CharField(max_length=50,default="pending")
 
+class EnrollModel(models.Model):
+    idno = models.AutoField(primary_key=True)
+    coursename = models.CharField(max_length=50,unique=True)
+    facultyname = models.CharField(max_length=50)
+    fees = models.FloatField()
+    stardate = models.CharField(max_length=50)
+    duration = models.IntegerField()
+    classtime = models.TimeField()
