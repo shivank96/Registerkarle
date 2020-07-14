@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.views.generic import CreateView,ListView,DeleteView,DetailView,UpdateView,TemplateView,View
 from django.contrib.messages.views import SuccessMessageMixin
@@ -66,3 +67,14 @@ def approve(request):
     return redirect('approve_students')
 
 
+def Reject(request):
+    no = request.GET.get("no")
+    StudentModel.objects.filter(idno=no).delete()
+    messages.success(request, "product added successfully")
+    return redirect('approve_students')
+
+
+class ViewApproveUsers(ListView):
+    template_name = "viewapprovedstudents.html"
+    model = StudentModel
+    fields = "__all__"

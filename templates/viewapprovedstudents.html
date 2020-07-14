@@ -2,13 +2,10 @@
 {% block commom %}
  <table class="table table-dark">
     <tr>
-        <form action="{% url 'View_approve_users' %}">
-{#                <input type="hidden" name="no" value="{{ x.idno }}">#}
-                <th style="text-align: left;color: black;background-color: white" colspan="2"><button type="submit" class="btn btn-success">View Approved Users</button></th>
+        <form action="{% url 'approve_students' %}">
+                <th style="text-align: left;color: black;background-color: white" colspan="2"><button type="submit" class="btn btn-success">View Pending Users</button></th>
             </form>
-        <th colspan="4" style="text-align: left;color: black;background-color: white">Registered students</th>
-    </tr>
-
+        <th colspan="5" style="text-align: left;color: black;background-color: white">Approved students</th></tr>
         <tr>
             <th>StudentName</th>
             <th>ContactNumber</th>
@@ -19,7 +16,7 @@
 {#            <th>Salary</th>#}
         </tr>
     {% for x in object_list %}
-        {% if x.status == "pending" %}
+        {% if x.status == "Active" %}
         <tr>
         <th>{{ x.name }}</th>
             <th>{{ x.contactnumber }}</th>

@@ -36,5 +36,9 @@ urlpatterns = [
 
     path('approve_students/',views.ApproveStudents.as_view(),name="approve_students"),
 
-    path('approve/',views.approve,name="approve")
+    path('reject/',views.Reject,name="Reject"),
+
+    path('approve/',views.approve,name="approve"),
+
+    path('View_approve_users/',views.ViewApproveUsers.as_view(),name="View_approve_users")
 ]
