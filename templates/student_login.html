@@ -1,0 +1,29 @@
+{% load static %}
+<body>
+<link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+
+{#    <table align="center">#}
+<div class="container">
+    <div class="form">
+        <h2>Login Form</h2>
+        <form action="{% url 'Check_details' %}" method="post">
+
+            {% csrf_token %}
+            <div class="inputbox">
+                <input type="email"  name="eid" placeholder="Username" required>
+            </div>
+            <div class="inputbox">
+                <input type="password" name="pwd" placeholder="Password" required>
+            </div>
+            <div class="inputbox">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+        <form action="{% url 'main' %}">
+            <div class="inputbox">
+                <input type="submit" value="home">
+            </div>
+        </form>
+    </div>
+</div>
+    </body>

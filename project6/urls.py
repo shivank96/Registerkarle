@@ -40,5 +40,9 @@ urlpatterns = [
 
     path('approve/',views.approve,name="approve"),
 
-    path('View_approve_users/',views.ViewApproveUsers.as_view(),name="View_approve_users")
+    path('View_approve_users/',views.ViewApproveUsers.as_view(),name="View_approve_users"),
+
+    path('student_login/',TemplateView.as_view(template_name="student_login.html"),name="student_login"),
+
+    path('Check_details/',views.CheckDetails,name="Check_details")
 ]

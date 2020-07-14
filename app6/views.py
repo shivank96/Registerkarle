@@ -78,3 +78,13 @@ class ViewApproveUsers(ListView):
     template_name = "viewapprovedstudents.html"
     model = StudentModel
     fields = "__all__"
+
+
+def CheckDetails(request):
+    ema = request.POST.get("eid")
+    pwd = request.POST.get("pwd")
+    result = StudentModel.objects.get(emailid=ema)
+    if result.status == "Active" and result.emailid == ema and result.password == pwd:
+        return render(request,"userwelcome.html",{"data":CourseModel.objects.all()})
+    else:
+        return redirect('student_login')
