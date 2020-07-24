@@ -1,15 +1,27 @@
 {% extends 'common.html' %}
 {% block commom %}
-<form method="post">
+{% load static %}
+   <script type="text/javascript" src= "{% static 'js/ajaxcalls.js' %}">
+   </script>
+
+    <form method="post" action="{% url 'save_student' %}">
     {% csrf_token %}
     <table class="table table-dark">
-    <tr><th colspan="2" style="text-align: center">student registration</th></tr>
-        <tr><th>
-            {{ form }}
+    <tr><th colspan="2" style="text-align: center">Student registration</th></tr>
+        <tr><th>Studentname</th><th><input type="text" name="t1" required onblur="ajaxrequest('one','http://127.0.0.1:8000/CheckName/','one1')" id="one">
+        <span class="alert alert-warning" role="alert" style="text-align: center" id="one1"></span>
         </th></tr>
+        <tr><th>Contact no</th><th><input type="number" name="t2" required onblur="ajaxrequest('two','http://127.0.0.1:8000/CheckContact/','two2')" id="two">
+         <span class="alert alert-warning" role="alert" style="text-align: center" id="two2"></span>
+        </th></tr>
+        <tr><th>Email</th><th><input type="email" name="t3" required onblur="ajaxrequest('three','http://127.0.0.1:8000/CheckEmail/','three3')" id="three">
+        <span class="alert alert-warning" role="alert" style="text-align: center" id="three3"></span>
+        </th></tr>
+        <tr><th>Password</th><th><input type="password" name="t4" required></th></tr>
+        <tr hidden><th hidden>Status</th><th><input type="text" name="t5" value="pending"></th></tr>
     <tr>
-        <th colspan="2">
-            <button type="submit">Save</button>
+        <th colspan="2" style="text-align: center">
+            <button type="submit" class="btn btn-success" id="b1">Save</button>
         </th>
     </tr>
     </table>
@@ -21,4 +33,5 @@
     {% endif %}
 
     </form>
+
 {% endblock %}

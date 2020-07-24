@@ -5,6 +5,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 # from django.contrib.auth.models import User
 from app6.models import CourseModel,StudentModel,EnrollModel
 from django.db.utils import IntegrityError
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.http import JsonResponse
 
 
 def Check_Credentials(request):
@@ -19,12 +22,12 @@ def Adminmain(request):
     return render(request,"adminwelcome.html")
 
 
-class AddCourse(SuccessMessageMixin,CreateView):
+class AddCourse(TemplateView):
     template_name = "Course_registration.html"
-    model = CourseModel
-    fields = "__all__"
-    success_url = "/addcourse/"
-    success_message = "Course details have been saved successfully"
+    # model = CourseModel
+    # fields = "__all__"
+    # success_url = "/addcourse/"
+    # success_message = "Course details have been saved successfully"
 
 class Courseinfo(ListView):
     template_name = "Coursesinfo.html"
@@ -50,12 +53,12 @@ class DeleteEmployee(DeleteView):
     model = CourseModel
     success_url = '/viewcourse/'
 
-class StudentRegister(SuccessMessageMixin,CreateView):
+class StudentRegister(TemplateView):
     template_name = "Studentregistration.html"
-    model = StudentModel
-    fields = "__all__"
-    success_url = "/student_register/"
-    success_message = "Your details have been saved please wait for approval"
+    # model = StudentModel
+    # fields = "__all__"
+    # success_url = "/student_register/"
+    # success_message = "Your details have been saved please wait for approval"
 
 class ApproveStudents(ListView):
     template_name = "viewstudents.html"
@@ -132,3 +135,80 @@ class Viewenrollments(ListView):
     template_name = "Emrolledcoures.html"
     model = EnrollModel
     queryset = EnrollModel.objects.values('idno', 'coursename', 'facultyname', 'stardate','fees','duration','classtime').order_by('idno')
+
+def save_course(request):
+    cname = request.POST.get("t1")
+    fname = request.POST.get("t2")
+    fee = request.POST.get("t3")
+    sdate = request.POST.get("t4")
+    dura = request.POST.get("t5")
+    ctime = request.POST.get("t6")
+    CourseModel(coursename=cname,facultyname=fname,fees=fee,stardate=sdate,duration=dura,classtime=ctime).save()
+    messages.success(request,"Course details have been saved successfully")
+    return redirect("addcourse")
+
+@method_decorator(csrf_exempt,name='dispatch')
+def CheckCourseName(request):
+    name = request.POST.get("cname")
+    print(name)
+    try:
+        CourseModel.objects.get(coursename=name)
+        res = {"error":"Name is already taken"}
+    except CourseModel.DoesNotExist:
+        res = {"mess":"Name is available"}
+    return JsonResponse(res)
+
+@method_decorator(csrf_exempt,name='dispatch')
+def CheckFacultyName(request):
+    name = request.POST.get("cname")
+    print(name)
+    try:
+        CourseModel.objects.get(facultyname=name)
+        res = {"error": "Faculty is not free"}
+    except CourseModel.DoesNotExist:
+        res = {"mess": "Faculty is available"}
+    return JsonResponse(res)
+
+
+def save_student(request):
+    sname = request.POST.get("t1")
+    contact = request.POST.get("t2")
+    ema = request.POST.get("t3")
+    password = request.POST.get("t4")
+    stat = request.POST.get("t5")
+    StudentModel(name=sname,contactnumber=contact,emailid=ema,password=password,status=stat).save()
+    messages.success(request, "Your details have been saved please wait for approval")
+    return redirect("student_register")
+
+@method_decorator(csrf_exempt,name='dispatch')
+def CheckName(request):
+    name = request.POST.get("cname")
+    print(name)
+    try:
+        StudentModel.objects.get(name=name)
+        res = {"error":"Username with this name is already taken"}
+    except StudentModel.DoesNotExist:
+        res = {"mess":"Name is available"}
+    return JsonResponse(res)
+
+@method_decorator(csrf_exempt,name='dispatch')
+def CheckContact(request):
+    contact = request.POST.get("cname")
+    print(contact)
+    try:
+        StudentModel.objects.get(contactnumber=contact)
+        res = {"error": "This number is already used"}
+    except StudentModel.DoesNotExist:
+        res = {"mess": "This number is available"}
+    return JsonResponse(res)
+
+@method_decorator(csrf_exempt,name='dispatch')
+def CheckEmail(request):
+    email = request.POST.get("cname")
+    print(email)
+    try:
+        StudentModel.objects.get(emailid=email)
+        res = {"error":"Email id is already taken"}
+    except StudentModel.DoesNotExist:
+        res = {"mess":"Email id is available"}
+    return JsonResponse(res)

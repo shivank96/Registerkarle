@@ -1,13 +1,27 @@
 {% extends 'adminmainmenu.html' %}
 {% block commom %}
-    <form method="post">
+{% load static %}
+   <script type="text/javascript" src= "{% static 'js/ajaxcalls.js' %}">
+   </script>
+
+    <form method="post" action="{% url 'save_course' %}">
     {% csrf_token %}
     <table class="table table-dark">
     <tr><th colspan="2" style="text-align: center">Course registration</th></tr>
-        <tr><th>{{ form }}</th></tr>
+        <tr><th>Coursename</th><th><input type="text" name="t1" required onblur="ajaxrequest('one','http://127.0.0.1:8000/CheckCourseName/','one1')" id="one">
+        <span class="alert alert-warning" role="alert" style="text-align: center" id="one1"></span>
+        </th></tr>
+        <tr><th>Facultyname</th><th><input type="text" name="t2" required onblur="ajaxrequest('two','http://127.0.0.1:8000/CheckFacultyName/','two2')" id="two">
+         <span class="alert alert-warning" role="alert" style="text-align: center" id="two2"></span>
+        </th></tr>
+        <tr><th>Fees</th><th><input type="number" name="t3" required></th></tr>
+        <tr><th>Startdate</th><th><input type="date" name="t4" required></th></tr>
+        <tr><th>Duration</th><th><input type="number" name="t5" required></th></tr>
+        <tr><th>Classtime</th><th><input type="time" name="t6" required></th></tr>
+{#        <tr><th>{{ form }}</th></tr>#}
     <tr>
-        <th colspan="2">
-            <button type="submit">Save</button>
+        <th colspan="2" style="text-align: center">
+            <button type="submit" class="btn btn-success" id="b1">Save</button>
         </th>
     </tr>
     </table>

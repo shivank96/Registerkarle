@@ -11,7 +11,7 @@
             <th>ContactNumber</th>
             <th>Emailid</th>
             <th>status</th>
-            <th>Approve</th>
+{#            <th>Approve</th>#}
             <th>Reject/Delete</th>
 {#            <th>Salary</th>#}
         </tr>
@@ -22,10 +22,10 @@
             <th>{{ x.contactnumber }}</th>
             <th>{{ x.emailid }}</th>
             <th>{{ x.status }}</th>
-            <form action="{% url 'approve' %}" method="get">
-                <input type="hidden" name="no" value="{{ x.idno }}">
-                <th><button type="submit">Yes</button></th>
-            </form>
+{#            <form action="{% url 'approve' %}" method="get">#}
+{#                <input type="hidden" name="no" value="{{ x.idno }}">#}
+{#                <th><button type="submit">Yes</button></th>#}
+{#            </form>#}
             <form action="{% url 'Reject' %}" method="get">
                 <input type="hidden" name="no" value="{{ x.idno }}">
                 <th><button type="submit">Yes</button></th>

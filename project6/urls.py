@@ -54,7 +54,21 @@ urlpatterns = [
 
     path('studentmain/',views.Studentmain,name="studentmain"),
 
-    path('viewenrollments/',views.Viewenrollments.as_view(),name="viewenrollments")
+    path('viewenrollments/',views.Viewenrollments.as_view(),name="viewenrollments"),
+
+    path('save_course/', views.save_course, name="save_course"),
+
+    path('CheckCourseName/', views.CheckCourseName, name="CheckCourseName"),
+
+    path('CheckFacultyName/', views.CheckFacultyName, name="CheckFacultyName"),
+
+    path('save_student/',views.save_student,name="save_student"),
+
+    path('CheckName/', views.CheckName, name="CheckName"),
+
+    path('CheckContact/', views.CheckContact, name="CheckContact"),
+
+    path('CheckEmail/',views.CheckEmail,name="CheckEmail")
 
 
 ]
